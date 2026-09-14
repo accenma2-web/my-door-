@@ -1,0 +1,30 @@
+name = "my-door"
+main = "worker.js"
+compatibility_date = "2024-11-01"
+
+# Cloudflare Workers AI (image + text generation) — already used by the app.
+[ai]
+binding = "AI"
+
+# D1 database — stores users, sessions, OTP codes, and design metadata.
+# Create it first:  wrangler d1 create my-door-db
+# Then paste the returned database_id below.
+[[d1_databases]]
+binding = "DB"
+database_name = "my-door-db"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+
+# R2 bucket — stores the generated design images saved to a user's history.
+# Create it first:  wrangler r2 bucket create my-door-designs
+[[r2_buckets]]
+binding = "DESIGNS_BUCKET"
+bucket_name = "my-door-designs"
+
+# Secrets (set with `wrangler secret put <NAME>`, do NOT put real values here):
+#   ADMIN_BOOTSTRAP_SECRET   -> one-time secret used to promote your first admin user
+#   SMS_PROVIDER_KEY         -> your SMS provider's API key, once you wire one up (see worker.js: sendOtpSms)
+#
+# Plain (non-secret) vars can go here, e.g. while testing OTP without a real SMS provider:
+[vars]
+OTP_DEBUG = "1"
+# SMS_PROVIDER_URL = "https://api.your-sms-provider.com/send"
