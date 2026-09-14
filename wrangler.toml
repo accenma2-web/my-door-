@@ -16,4 +16,4 @@ bucket_name = "my-door-designs"
 
 [vars]
 OTP_DEBUG = "1"
-Refresh wrangler config
+
