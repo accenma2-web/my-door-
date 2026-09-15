@@ -10,9 +10,5 @@ binding = "DB"
 database_name = "my-door-db"
 database_id = "d52b71d6-a6bd-42d6-aab9-2ba958602a35"
 
-[[r2_buckets]]
-binding = "DESIGNS_BUCKET"
-bucket_name = "my-door-designs"
-
 [vars]
 OTP_DEBUG = "1"
